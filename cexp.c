@@ -3,12 +3,20 @@
 #include <stdlib.h>
 #include <string.h>
 #define SESSION_DURATION 1500 
+
 struct data{
     char *ch;
     char *ch1;
     char *ch2;
     char *ch3;  
 };
+
+void display() {
+    char command[100];
+    sprintf(command, "py pyt3.py"); // Replace with your path
+    system(command);
+}
+
 void start_timer() {
     printf("Welcome to the Focus Timer!\n");
     printf("Please enter your name: ");
@@ -18,6 +26,7 @@ void start_timer() {
     char *rc;
     char r[100];
     int rpg= 1;
+
     while(fgets(r,100,p)){
         rc=strtok(r,",");
         if (strcmp(rc,name)==0){
@@ -41,8 +50,10 @@ void start_timer() {
     } else {
         duration =duration * 60;
     }
+
     printf("Focus session started! Stay focused for %d minutes...\n",duration / 60);
     //sleep(duration);
+    
     printf("Session complete! Well done!\n");
     FILE *fp=fopen("session.csv","r");
      struct data d;
@@ -82,10 +93,19 @@ void start_timer() {
     remove("session.csv");
     rename("temp.csv", "session.csv");
     printf("Value incremented successfully.\n");
+    
 }
 
 int main() {
     start_timer();
+    char choice;
+    printf("Do u want to See ur progress press y/n.\n");
+    fflush(stdin);
+    scanf("%c",&choice);
+    if (choice == 'y' || choice == 'Y') {
+        display();
+    }
     printf("Thank you");
     return 0;
+    
 }
