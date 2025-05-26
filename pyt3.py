@@ -69,7 +69,7 @@ print(building_count)
 
 root = tk.Tk()
 root.title("House Images") 
-canvas = tk.Canvas(root, width=800, height=400, bg="white")
+canvas = tk.Canvas(root, width=800, height=450, bg="white")
 canvas.pack()
 box_width = 50
 box_height = 50
@@ -150,15 +150,17 @@ for i in range(int(building_count[2])):
         canvas.create_image(x1, y1, anchor=tk.NW, image=house_photo)
 
 start_y= start_y + box_height + spacing
-canvas.create_text(100, start_y, text="Ranking Top 3:", font=("Arial", 10))
+canvas.create_text(400, start_y, text="Ranking Top 3:".ljust(30), font=("Arial", 15))
 i=0
 print(ranks)
 for player, score in ranks[0]:
-    canvas.create_text(100, start_y + (i+1) * 20, text=f"{i + 1}. {player} - {score}", font=("Arial", 15))
+    canvas.create_text(400, start_y + (i+1) * 20, text=f"{i + 1}. {player} - {score}".ljust(30), font=("Arial", 15))
     i += 1
 
-canvas.create_text(100, start_y + 4*20 , text=f"Your Rank: {ranks[1]}", font=("Arial", 15))
-
+canvas.create_text(400, start_y + 4*20 , text=f"Your Rank: {ranks[1]}".ljust(30), font=("Arial", 15))
+lp=overall()
+average=(lp[0]*20+lp[1]*50+lp[2]*70)/(sum(lp))
+canvas.create_text(400, start_y + 5*20 , text=f"Average Concentration : {average} min".ljust(30), font=("Arial", 15))
 
 fig = plt.Figure(figsize=(4, 3), dpi=100) # Adjust figsize as needed
 ax = fig.add_subplot(111)
@@ -177,9 +179,9 @@ ax.bar(x_values, y_values)
 ax.set_title('Bar graph of Your Records')
 canvas_widget = FigureCanvasTkAgg(fig, master=root)
 canvas_widget_canvas = canvas_widget.get_tk_widget()
-canvas_widget_canvas.place(x=10,y=400)
+canvas_widget_canvas.place(x=10,y=450)
 
-lp=overall()
+
 fig = plt.Figure(figsize=(4, 3), dpi=100) # Adjust figsize as needed
 ax = fig.add_subplot(111)
 x_values = ["Easy", "Medium", "Hard"]
@@ -188,7 +190,7 @@ ax.bar(x_values, y_values)
 ax.set_title('Bar graph of All Records')
 canvas_widget = FigureCanvasTkAgg(fig, master=root)
 canvas_widget_canvas = canvas_widget.get_tk_widget()
-canvas_widget_canvas.place(x=400,y=400)
+canvas_widget_canvas.place(x=400,y=450)
 
 
 root.mainloop()
