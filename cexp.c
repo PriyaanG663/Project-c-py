@@ -11,6 +11,10 @@ struct data{
     char *ch3;  
 };
 
+void nouse(){
+    printf("nouse man");
+}
+
 void display() {
     char command[100];
     sprintf(command, "py pyt3.py"); // Replace with your path
